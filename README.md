@@ -69,6 +69,14 @@ Switch to peer1.org1 and install.
 export CORE_PEER_ADDRESS=peer1.org1.example.com:8051
 peer chaincode install -n marblesp -v 1.0 -p github.com/chaincode/marbles02_private/go/
 ```
+
+Let's check how this is happening by looking at the docker containers.
+```
+docker ps
+```
+Notice how CORE_PEER_ADDRESS = peer1.org1.example.com routes to port 8051.  
+
+
 Switch to org2.
 ```
 export CORE_PEER_LOCALMSPID=Org2MSP
