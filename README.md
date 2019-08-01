@@ -74,7 +74,7 @@ Let's check how this is happening by looking at the docker containers.
 ```
 docker ps
 ```
-Notice how CORE_PEER_ADDRESS = peer1.org1.example.com routes to port 8051.  
+Notice how peer0.org1 routes to port 8051. This is why we did CORE_PEER_ADDRESS = peer1.org1.example.com:8051. 
 
 
 Switch to org2.
