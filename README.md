@@ -136,7 +136,7 @@ peer chaincode query -C mychannel -n marblesp -c '{"Args":["readMarble","marble1
 ```
 peer chaincode query -C mychannel -n marblesp -c '{"Args":["readMarblePrivateDetails","marble1"]}'
 ```
-Notice how a member that is not authorized by the Configuration is not allowed to view the pricing details of the Marble object.
+Notice how a member that is not authorized by the Configuration is not allowed to view the pricing details of the Marble object. Instead of the data seen when we were acting as peerX.org1, we are presented a hash.
 
 Private data can also be purged through the blockToLive variable in the Configuration. We performed a transaction and effectively added a block to the chain when we created the Marble object. However, performing queries to the ledger is not a transaction and, therefore, is not a block added to the chain. 
 
