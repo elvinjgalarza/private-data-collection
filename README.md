@@ -134,6 +134,65 @@ Private data can also be purged through the blockToLive variable in the Configur
 
 The blockToLive's number indicates how many blocks on the chain must be added before the private data is deleted. This means that we can create or transfer Marble objects , which are satisfactory to be considered transactions, the number of times that is labeled in the blockToLive and expect the private data to be gone. 
 
+**Follow these steps to perform a purge on private data** 
+
+16. Switch back to peer0.org1
+```
+export CORE_PEER_ADDRESS=peer0.org1.example.com:7051
+export CORE_PEER_LOCALMSPID=Org1MSP
+export CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+export CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
+export PEER0_ORG1_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
+```
+17. Let's observe the blocks that I was talking about. Keeping the same terminal you're working on open, let's open up another new terminal and perform these commands.
+```
+docker logs peer0.org1.example.com 2>&1 | grep -i -a -E 'private|pvt|privdata'
+```
+18. Perform a query in the old terminal. 
+```
+peer chaincode query -C mychannel -n marblesp -c '{"Args":["readMarblePrivateDetails","marble1"]}'
+```
+Now perform step 17 again. Notice how no new blocks were added because we performed a query.
+
+19. Create a new Marble object belonging to Elvin. Name is marble2. 
+```
+export MARBLE=$(echo -n "{\"name\":\"marble2\",\"color\":\"blue\",\"size\":35,\"owner\":\"elvin\",\"price\":99}" | base64 | tr -d \\n)
+peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["initMarble"]}' --transient "{\"marble\":\"$MARBLE\"}"
+```
+Now perform step 17 again. Notice how we added a new block because we performed a method in the chaincode that is satisfactory to be considered a transaction.
+
+Repeat step 18 to query again.
+
+20. Let's transfer marble2 to Joe.
+```
+export MARBLE_OWNER=$(echo -n "{\"name\":\"marble2\",\"owner\":\"joe\"}" | base64 | tr -d \\n)
+peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["transferMarble"]}' --transient "{\"marble_owner\":\"$MARBLE_OWNER\"}"
+```
+
+Now perform step 17 again. Notice how we added a new block because we performed a method in the chaincode that is satisfactory to be considered a transaction.
+
+Repeat step 18 to query again.
+
+21. Let's transfer marble2 to Tom.
+```
+export MARBLE_OWNER=$(echo -n "{\"name\":\"marble2\",\"owner\":\"tom\"}" | base64 | tr -d \\n)
+peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["transferMarble"]}' --transient "{\"marble_owner\":\"$MARBLE_OWNER\"}"
+```
+
+Now perform step 17 again. Notice how we added a new block because we performed a method in the chaincode that is satisfactory to be considered a transaction.
+
+Repeat step 18 to query again.
+
+22. Let's transfer marble2 to Jerry.
+```
+export MARBLE_OWNER=$(echo -n "{\"name\":\"marble2\",\"owner\":\"jerry\"}" | base64 | tr -d \\n)
+peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["transferMarble"]}' --transient "{\"marble_owner\":\"$MARBLE_OWNER\"}"
+```
+Now perform step 17 again. Notice how we added a new block because we performed a method in the chaincode that is satisfactory to be considered a transaction.
+
+Repeat step 18 to query again. 
+
+Notice now that the private data of marble1 is no longer accessible. We've effectively purged the private data.
 
 ## License
 Hyperledger Project source code files are made available under the Apache License, Version 2.0 (Apache-2.0), located in the [LICENSE](https://github.com/hyperledger/fabric-samples/blob/release-1.4/LICENSE) file in Hyperledger's fabric-samples. Hyperledger Project documentation files are made available under the Creative Commons Attribution 4.0 International License (CC-BY-4.0), available at http://creativecommons.org/licenses/by/4.0/.
