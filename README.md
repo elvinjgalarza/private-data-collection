@@ -77,7 +77,7 @@ docker ps
 Notice how peer0.org1 routes to port 8051. This is why we did CORE_PEER_ADDRESS = peer1.org1.example.com:8051. 
 
 
-Switch to org2.
+Switch to org2. Point to org2's [membership service provider](https://hyperledger-fabric.readthedocs.io/en/release-1.4/msp.html), and its [root certificate and private-key](https://hyperledger-fabric.readthedocs.io/en/release-1.4/identity/identity.html).
 ```
 export CORE_PEER_LOCALMSPID=Org2MSP
 export PEER0_ORG2_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
