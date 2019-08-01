@@ -140,7 +140,7 @@ Notice how a member that is not authorized by the Configuration is not allowed t
 
 Private data can also be purged through the blockToLive variable in the Configuration. We performed a transaction and effectively added a block to the chain when we created the Marble object. However, performing queries to the ledger is not a transaction and, therefore, is not a block added to the chain. 
 
-The blockToLive's number indicates how many blocks on the chain must be added before the private data is deleted. This means that we can create or transfer Marble objects , which are satisfactory to be considered transactions, the number of times that is labeled in the blockToLive and expect the private data to be gone. 
+The blockToLive's data + 1 indicates how many blocks on the chain must be added before the private data is deleted. This means that we can create or transfer Marble objects , which are satisfactory to be considered transactions, the number of times that is labeled in the blockToLive and expect the private data to be gone. 
 
 **Follow these steps to perform a purge on private data** 
 
