@@ -31,6 +31,9 @@ The peer has a private database that is logically separate from the channel ledg
 
 ## Tutorial
 1. Clone the repository.
+```
+git clone https://github.com/elvinjgalarza/private-data-collection.git
+```
 2. Remove any containers and inactive networks that may be up. WARNING! This will remove: all stopped containers and inactive networks
 ```
 docker ps
@@ -125,7 +128,11 @@ peer chaincode query -C mychannel -n marblesp -c '{"Args":["readMarble","marble1
 ```
 peer chaincode query -C mychannel -n marblesp -c '{"Args":["readMarblePrivateDetails","marble1"]}'
 ```
-Notice how 
+Notice how a member that is not authorized by the Configuration is not allowed to view the pricing details of the Marble object.
+
+Private data can also be purged through the blockToLive variable in the Configuration. We performed a transaction and effectively added a block to the chain when we created the Marble object. However, performing queries to the ledger is not a transaction and, therefore, is not a block added to the chain. 
+
+The blockToLive's number indicates how many blocks on the chain must be added before the private data is deleted. This means that we can create or transfer Marble objects , which are satisfactory to be considered transactions, the number of times that is labeled in the blockToLive and expect the private data to be gone. 
 
 
 ## License
