@@ -164,7 +164,7 @@ Now perform step 17 again. Notice how no new blocks were added because we perfor
 
 19. Create a new Marble object belonging to Elvin. Name is marble2. 
 ```
-export MARBLE=$(echo -n "{\"name\":\"marble2\",\"color\":\"blue\",\"size\":35,\"owner\":\"elvin\",\"price\":99}" | base64 | tr -d \\n)
+export MARBLE=$(echo -n "{\"name\":\"marble2\",\"color\":\"blue\",\"size\":35,\"owner\":\"dan\",\"price\":99}" | base64 | tr -d \\n)
 peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["initMarble"]}' --transient "{\"marble\":\"$MARBLE\"}"
 ```
 Now perform step 17 again. Notice how we added a new block because we performed a method in the chaincode that is satisfactory to be considered a transaction.
@@ -173,7 +173,7 @@ Repeat step 18 to query again.
 
 20. Let's transfer marble2 to Joe.
 ```
-export MARBLE_OWNER=$(echo -n "{\"name\":\"marble2\",\"owner\":\"joe\"}" | base64 | tr -d \\n)
+export MARBLE_OWNER=$(echo -n "{\"name\":\"marble2\",\"owner\":\"john\"}" | base64 | tr -d \\n)
 peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["transferMarble"]}' --transient "{\"marble_owner\":\"$MARBLE_OWNER\"}"
 ```
 
@@ -183,7 +183,7 @@ Repeat step 18 to query again.
 
 21. Let's transfer marble2 to Tom.
 ```
-export MARBLE_OWNER=$(echo -n "{\"name\":\"marble2\",\"owner\":\"tom\"}" | base64 | tr -d \\n)
+export MARBLE_OWNER=$(echo -n "{\"name\":\"marble2\",\"owner\":\"bob\"}" | base64 | tr -d \\n)
 peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["transferMarble"]}' --transient "{\"marble_owner\":\"$MARBLE_OWNER\"}"
 ```
 
@@ -193,7 +193,7 @@ Repeat step 18 to query again.
 
 22. Let's transfer marble2 to Jerry.
 ```
-export MARBLE_OWNER=$(echo -n "{\"name\":\"marble2\",\"owner\":\"jerry\"}" | base64 | tr -d \\n)
+export MARBLE_OWNER=$(echo -n "{\"name\":\"marble2\",\"owner\":\"maria\"}" | base64 | tr -d \\n)
 peer chaincode invoke -o orderer.example.com:7050 --tls --cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n marblesp -c '{"Args":["transferMarble"]}' --transient "{\"marble_owner\":\"$MARBLE_OWNER\"}"
 ```
 Now perform step 17 again. Notice how we added a new block because we performed a method in the chaincode that is satisfactory to be considered a transaction.
