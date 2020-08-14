@@ -1,5 +1,5 @@
 ## Private-Data Collection Lab
-This project demonstrates private-data collection capabilities on Hyperledger Fabric by utilizing the [Marbles](https://github.com/hyperledger/fabric-samples/tree/master/chaincode/marbles02_private) code pattern on the [Bring Your First Network](https://hyperledger-fabric.readthedocs.io/en/release-1.4/build_network.html) tutorial network.
+This project demonstrates private-data collection capabilities on Hyperledger Fabric 1.4.1 by utilizing the [Marbles](https://github.com/hyperledger/fabric-samples/tree/master/chaincode/marbles02_private) code pattern on the [Bring Your First Network](https://hyperledger-fabric.readthedocs.io/en/release-1.4/build_network.html) tutorial network.
 
 ## Disclaimer
 Please note: I am not affiliated with Hyperledger Fabric and do not own any of the content displayed here. All modifications to original content are my own. Please review the License header.
